@@ -94,12 +94,12 @@ class MainTest {
         assertEquals(res10.status, 200);
     }
 
-    @Test
+/*    @Test
     //This test applies to user story 1 of our project code.
     public void testFireAt() {
         TestResponse res = request("POST", "/fire/1/1");
         assertEquals(200, res.status);
-    }
+    } */
 
     private TestResponse request(String method, String path, String body) {
         try {
