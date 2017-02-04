@@ -41,21 +41,21 @@ class BattleshipModelTest {
         assertEquals(game.computer_submarine.length, 2);
 
         //Check the hit and miss arrays
-        assertEquals(game.playerHits.length, 100);
-        for (int i = 0; i < 100; i++) {
-            assertEquals(game.playerHits[i], 0);
+        assertEquals(game.playerHits.length, 16);
+        for (int i = 0; i < 16; i++) {
+            assertEquals(game.playerHits[i], null);
         }
-        assertEquals(game.playerMisses.length, 100);
-        for (int i = 0; i < 100; i++) {
-            assertEquals(game.playerMisses[i], 0);
+        assertEquals(game.playerMisses.length, 84);
+        for (int i = 0; i < 84; i++) {
+            assertEquals(game.playerMisses[i], null);
         }
-        assertEquals(game.computerHits.length, 100);
-        for (int i = 0; i < 100; i++) {
-            assertEquals(game.computerHits[i], 0);
+        assertEquals(game.computerHits.length, 16);
+        for (int i = 0; i < 16; i++) {
+            assertEquals(game.computerHits[i], null);
         }
-        assertEquals(game.computerMisses.length, 100);
-        for (int i = 0; i < 100; i++) {
-            assertEquals(game.computerMisses[i], 0);
+        assertEquals(game.computerMisses.length, 84);
+        for (int i = 0; i < 84; i++) {
+            assertEquals(game.computerMisses[i], null);
         }
     }
 

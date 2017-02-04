@@ -44,10 +44,10 @@ public class BattleshipModel {
 
     /* Game stats: Can be populated as 2D array like {{x, y}, ...}, or can
     simply hold a list of relevant GridSquare objects */
-    int[] playerHits;
-    int[] playerMisses;
-    int[] computerHits;
-    int[] computerMisses;
+    GridSquare playerHits[];
+    GridSquare playerMisses[];
+    GridSquare computerHits[];
+    GridSquare computerMisses[];
 
     // Constructor: Creates each ship and initializes their names and lengths
     public BattleshipModel() {
@@ -63,9 +63,9 @@ public class BattleshipModel {
         this.computer_destroyer = new Ship("Computer_Destroyer", 2);
         this.computer_submarine = new Ship("Computer_Submarine", 2);
 
-        this.playerHits = new int[100];
-        this.playerMisses = new int[100];
-        this.computerHits = new int[100];
-        this.computerMisses = new int[100];
+        this.playerHits = new GridSquare[16];
+        this.playerMisses = new GridSquare[84];
+        this.computerHits = new GridSquare[16];
+        this.computerMisses = new GridSquare[84];
     }
 }
