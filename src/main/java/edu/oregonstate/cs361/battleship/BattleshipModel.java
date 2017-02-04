@@ -50,7 +50,7 @@ public class BattleshipModel {
     int[] computerMisses;
 
     // Constructor: Creates each ship and initializes their names and lengths
-    BattleshipModel() {
+    public BattleshipModel() {
         this.aircraftCarrier = new Ship("AircraftCarrier", 5);
         this.battleship = new Ship("Battleship", 4);
         this.cruiser = new Ship("Cruiser", 3);

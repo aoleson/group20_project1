@@ -1,7 +1,12 @@
 //This function will be called once the page is loaded.  It will get a new game model from the back end, and display it.
 $( document ).ready(function() {
+
   $.getJSON("model", function( json ) {
     displayGameState(json);
+<<<<<<< HEAD
+=======
+    gameModel = json;
+>>>>>>> 1a451ffad97eea180ba9ef15d26741e3ad9759b9
    });
 });
 
@@ -17,8 +22,9 @@ function placeShip() {
 
    //This will be called when the call is returned from the server.
    request.done(function( currModel ) {
+     displayGameState(currModel);
      gameModel = currModel;
-     displayGameState(gameModel);
+
    });
 
    // if there is a problem, and the back end does not respond, then an alert will be shown.
@@ -30,7 +36,7 @@ function placeShip() {
 //Similar to placeShip, but instead it will fire at a location the user selects.
 function fire(){
    var request = $.ajax({
-     url: "/fire/"+$( "#colFire" ).val()+"/"+$( "#rowFire" ).val(),
+     url: "/fire/"+$( "#rowFire" ).val()+"/"+$( "#colFire" ).val(),
      method: "post",
      data: JSON.stringify(gameModel),
      contentType: "application/json; charset=utf-8",
@@ -85,7 +91,6 @@ function displayShip(ship){
  startCoordDown = ship.start.Down;
  endCoordAcross = ship.end.Across;
  endCoordDown = ship.end.Down;
- //console.log(startCoordAcross, startCoordDown, endCoordAcross, endCoordDown);
  if(startCoordAcross > 0){
     if(startCoordAcross == endCoordAcross){
         for (i = startCoordDown; i <= endCoordDown; i++) {
