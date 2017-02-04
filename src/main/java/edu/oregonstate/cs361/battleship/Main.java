@@ -19,7 +19,7 @@ public class Main {
         //This will listen to GET requests to /model and return a clean new model
         get("/model", (req, res) -> newModel());
         //This will listen to POST requests and expects to receive a game model, as well as location to fire to
-        post("/fire/:row/:col", (req, res) -> fireAt(req));
+     //   post("/fire/:row/:col", (req, res) -> fireAt(req));
         //This will listen to POST requests and expects to receive a game model, as well as location to place the ship
         post("/placeShip/:id/:row/:col/:orientation", (req, res) -> placeShip(req));
     }
@@ -104,6 +104,11 @@ public class Main {
         Gson gson = new Gson();
         String json = req.body();
         BattleshipModel gameState = gson.fromJson(json, BattleshipModel.class);
+
+        String ret = gson.toJson(gameState);
+        System.out.println(ret);
+
+
         return gameState;
     }
 
@@ -132,7 +137,6 @@ public class Main {
         }
 
         //Compares the shipname to all existing ships on the board to check if already placed
-        System.out.println(shipname);
         switch(shipname) {
             case "aircraftCarrier":
                 length = 5;
@@ -259,7 +263,7 @@ public class Main {
         return ret;
     }
 
-    //Similar to placeShip, but with firing.
+  /*  //Similar to placeShip, but with firing.
     private static String fireAt(Request req)
     {
         //code creates turns and uses the different methods to fire
@@ -284,5 +288,5 @@ public class Main {
         }
         return req.body();
     }
-
+*/
 }
