@@ -278,8 +278,17 @@ class BattleshipModelTest {
         assertEquals(game.computer_submarine.start.Down, 17);
         assertEquals(game.computer_submarine.end.Across, 17);
         assertEquals(game.computer_submarine.end.Down, 17);
-
     }
 
+    @Test
+    public void test_get_num_hits_misses() {
+        int num = game.get_num_hits_misses(game.playerHits);
+        assertEquals(num, 0);
+        BattleshipModel.GridSquare square = new BattleshipModel.GridSquare();
+        square.Across = 5;
+        square.Down = 5;
+        game.playerHits[0] = square;
+        assertEquals(game.get_num_hits_misses(game.playerHits), 1);
+    }
 }
 

@@ -68,4 +68,14 @@ public class BattleshipModel {
         this.computerHits = new GridSquare[16];
         this.computerMisses = new GridSquare[84];
     }
+
+    public static int get_num_hits_misses(GridSquare array[]) {
+        int count = 0;
+        for (int i = 0; i < array.length; i++) {
+            if (array[i] != null) {
+                count++;
+            }
+        }
+        return count;
+    }
 }
