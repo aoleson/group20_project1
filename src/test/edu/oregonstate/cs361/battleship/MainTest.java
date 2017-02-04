@@ -35,6 +35,7 @@ class MainTest {
 
     @Test
     public void testGetModel() {
+
         int lowest_res = 5;
         int highest_res = 5;
 
@@ -65,10 +66,18 @@ class MainTest {
     }
 
     @Test
-    public void testPlaceShip() {
+    public void testGetModelFromReq(){
         TestResponse res = request("POST", "/placeShip/aircraftCarrier/1/1/horizontal");
         assertEquals(200, res.status);
-        assertEquals("SHIP",res.body);
+    }
+
+    @Test
+    public void testPlaceShip() {
+        TestResponse res = request("POST", "/placeShip/destroyer/1/1/horizontal");
+        assertEquals(200, res.status);
+        //assertEquals("SHIP",res.body);
+      //  TestResponse res2 = request("POST", "/placeShip/aircraftCarrier/1/1/vertical");
+      //  assertEquals(200, res.status);
     }
 
     @Test
