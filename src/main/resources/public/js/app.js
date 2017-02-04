@@ -3,10 +3,7 @@ $( document ).ready(function() {
 
   $.getJSON("model", function( json ) {
     displayGameState(json);
-<<<<<<< HEAD
-=======
     gameModel = json;
->>>>>>> 1a451ffad97eea180ba9ef15d26741e3ad9759b9
    });
 });
 
