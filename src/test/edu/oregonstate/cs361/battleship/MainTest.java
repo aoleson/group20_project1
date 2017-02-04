@@ -94,12 +94,30 @@ class MainTest {
         assertEquals(res10.status, 200);
     }
 
-/*    @Test
-    //This test applies to user story 1 of our project code.
+    @Test
     public void testFireAt() {
-        TestResponse res = request("POST", "/fire/1/1");
+        BattleshipModel game = new BattleshipModel();
+        game.computer_destroyer.start.Across = 4;
+        game.computer_destroyer.start.Down = 5;
+        game.computer_destroyer.end.Across = 4;
+        game.computer_destroyer.end.Down = 6;
+        Gson gson = new Gson();
+        String json = gson.toJson(game);
+        TestResponse res = request("POST", "/fire/5/4", json);
         assertEquals(200, res.status);
-    } */
+        game.computer_submarine.start.Across = 7;
+        game.computer_submarine.start.Down = 3;
+        game.computer_submarine.end.Across = 8;
+        game.computer_submarine.end.Down = 3;
+        TestResponse res2 = request("POST", "/fire/8/4", json);
+        assertEquals(200, res2.status);
+        game.computer_aircraftCarrier.start.Across = 1;
+        game.computer_aircraftCarrier.start.Down = 1;
+        game.computer_aircraftCarrier.end.Across = 5;
+        game.computer_aircraftCarrier.end.Down = 1;
+        TestResponse res3 = request("POST", "/fire/1/1", json);
+        assertEquals(200, res3.status);
+    }
 
     private TestResponse request(String method, String path, String body) {
         try {
