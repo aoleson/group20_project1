@@ -41,21 +41,21 @@ class BattleshipModelTest {
         assertEquals(game.computer_submarine.length, 2);
 
         //Check the hit and miss arrays
-        assertEquals(game.playerHits.length, 100);
-        for (int i = 0; i < 100; i++) {
-            assertEquals(game.playerHits[i], 0);
+        assertEquals(game.playerHits.length, 16);
+        for (int i = 0; i < 16; i++) {
+            assertEquals(game.playerHits[i], null);
         }
-        assertEquals(game.playerMisses.length, 100);
-        for (int i = 0; i < 100; i++) {
-            assertEquals(game.playerMisses[i], 0);
+        assertEquals(game.playerMisses.length, 84);
+        for (int i = 0; i < 84; i++) {
+            assertEquals(game.playerMisses[i], null);
         }
-        assertEquals(game.computerHits.length, 100);
-        for (int i = 0; i < 100; i++) {
-            assertEquals(game.computerHits[i], 0);
+        assertEquals(game.computerHits.length, 16);
+        for (int i = 0; i < 16; i++) {
+            assertEquals(game.computerHits[i], null);
         }
-        assertEquals(game.computerMisses.length, 100);
-        for (int i = 0; i < 100; i++) {
-            assertEquals(game.computerMisses[i], 0);
+        assertEquals(game.computerMisses.length, 84);
+        for (int i = 0; i < 84; i++) {
+            assertEquals(game.computerMisses[i], null);
         }
     }
 
@@ -278,8 +278,17 @@ class BattleshipModelTest {
         assertEquals(game.computer_submarine.start.Down, 17);
         assertEquals(game.computer_submarine.end.Across, 17);
         assertEquals(game.computer_submarine.end.Down, 17);
-
     }
 
+    @Test
+    public void test_get_num_hits_misses() {
+        int num = game.get_num_hits_misses(game.playerHits);
+        assertEquals(num, 0);
+        BattleshipModel.GridSquare square = new BattleshipModel.GridSquare();
+        square.Across = 5;
+        square.Down = 5;
+        game.playerHits[0] = square;
+        assertEquals(game.get_num_hits_misses(game.playerHits), 1);
+    }
 }
 

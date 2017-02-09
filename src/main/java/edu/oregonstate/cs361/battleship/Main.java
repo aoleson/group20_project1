@@ -104,6 +104,10 @@ public class Main {
         Gson gson = new Gson();
         String json = req.body();
         BattleshipModel gameState = gson.fromJson(json, BattleshipModel.class);
+
+        String ret = gson.toJson(gameState);
+        System.out.println(ret);
+
         return gameState;
     }
 
@@ -132,7 +136,6 @@ public class Main {
         }
 
         //Compares the shipname to all existing ships on the board to check if already placed
-        System.out.println(shipname);
         switch(shipname) {
             case "aircraftCarrier":
                 length = 5;
@@ -262,27 +265,66 @@ public class Main {
     //Similar to placeShip, but with firing.
     private static String fireAt(Request req)
     {
-        //code creates turns and uses the different methods to fire
-        int win = 0;
-        int turn = 0;
-        int horizontal = 0;
-        int vertical = 0;
         Random num = new Random();
-        //while loop that will determine who's turn it is and what to do during their turn
-        while(win == 0){
-            if (turn == 0){ //this is the user's turn
-                horizontal = req.attribute("row");
-                vertical = req.attribute("col");
-                turn++;
-            } else{ //this is the AI's turn
-                horizontal = (num.nextInt(10)) + 1;
-                vertical = (num.nextInt(10)) + 1;
-                turn--;
-            }
-            
-            win = 1;
-        }
-        return req.body();
-    }
 
+        BattleshipModel game = getModelFromReq(req);
+
+        BattleshipModel.GridSquare square = new BattleshipModel.GridSquare();
+        square.Across = Integer.parseInt(req.params("col"));
+        square.Down = Integer.parseInt(req.params("row"));
+
+        System.out.println(square.Across);
+        System.out.println(square.Down);
+
+        BattleshipModel.Ship[] user_ships = {game.aircraftCarrier, game.battleship, game.cruiser, game.destroyer,
+                                             game.submarine};
+        BattleshipModel.Ship[] AI_ships = {game.computer_aircraftCarrier, game.computer_battleship,
+                                           game.computer_cruiser, game.computer_destroyer, game.computer_submarine};
+
+        for (int i = 0; i < 5; i++) {
+            if (AI_ships[i].start.Across == square.Across && AI_ships[i].end.Across == square.Across) {     // "vertical"
+                if (AI_ships[i].start.Down <= square.Down && square.Down <= AI_ships[i].end.Down) {
+                    game.playerHits[game.get_num_hits_misses(game.playerHits)] = square;
+                    break;
+                } else {
+                    game.playerMisses[game.get_num_hits_misses(game.playerMisses)] = square;
+                    break;
+                }
+            } else if (AI_ships[i].start.Down == square.Down && AI_ships[i].end.Down == square.Down) {      // "horizontal"
+                if (AI_ships[i].start.Across <= square.Across && square.Across <= AI_ships[i].end.Across) {
+                    game.playerHits[game.get_num_hits_misses(game.playerHits)] = square;
+                    break;
+                } else {
+                    game.playerMisses[game.get_num_hits_misses(game.playerMisses)] = square;
+                    break;
+                }
+            }
+        }
+        square.Down = (num.nextInt(10)) + 1;
+        square.Across = (num.nextInt(10)) + 1;
+
+        for (int i = 0; i < 5; i++) {
+             if (user_ships[i].start.Across == square.Across && user_ships[i].end.Across == square.Across) {     // "vertical"
+                if (user_ships[i].start.Down <= square.Down && square.Down <= user_ships[i].end.Down) {
+                    game.computerHits[game.get_num_hits_misses(game.computerHits)] = square;
+                    break;
+                } else {
+                    game.computerMisses[game.get_num_hits_misses(game.computerHits)] = square;
+                    break;
+                }
+            } else if (user_ships[i].start.Down == square.Down && user_ships[i].end.Down == square.Down) {      // "horizontal"
+                if (user_ships[i].start.Across <= square.Across && square.Across <= user_ships[i].end.Across) {
+                    game.computerHits[game.get_num_hits_misses(game.computerHits)] = square;
+                    break;
+                } else {
+                    game.computerMisses[game.get_num_hits_misses(game.computerMisses)] = square;
+                    break;
+                }
+            }
+        }
+
+        Gson gson = new Gson();
+        String ret = gson.toJson(game);
+        return ret;
+    }
 }
